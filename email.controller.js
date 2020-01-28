@@ -5,7 +5,7 @@ exports.sendEmail = async (req, res, next) => {
     body: { to_name, to, subject, body }
   } = req;
 
-  const errors = await validate({ to_name, to, body });
+  const errors = await exports.validate({ to_name, to, body });
   if (errors.length) {
     const error = new Error(`Record Invalid: ${errors.join(',')}`);
     error.errors = errors;
