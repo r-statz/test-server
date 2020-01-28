@@ -5,7 +5,7 @@ exports.sendEmail = async (req, res, next) => {
     body: { toName, toEmail, subject, body }
   } = req;
 
-  const errors = await exports.validate({ to_name, to, body });
+  const errors = await exports.validate({ toName, toEmail, body });
   if (errors.length) {
     const error = new Error(`Record Invalid: ${errors.join(',')}`);
     error.errors = errors;
@@ -37,12 +37,12 @@ exports.sendEmail = async (req, res, next) => {
   }
 };
 
-exports.validate = async ({ to_name, to, body }) => {
+exports.validate = async ({ toName, toEmail, body }) => {
   const errors = [];
   if (!body.length) errors.push('Email body cannot be blank');
-  if (!to_name || !to_name.trim()) errors.push('To name cannot be blank');
-  if (!to || !to.trim()) errors.push('To email cannot be blank');
-  if (to && !to.match(/^.+@.+\..+$/)) errors.push('Email format is invalid');
+  if (!toName || !toName.trim()) errors.push('To name cannot be blank');
+  if (!toEmail || !toEmail.trim()) errors.push('To email cannot be blank');
+  if (toEmail && !toEmail.match(/^.+@.+\..+$/)) errors.push('Email format is invalid');
   console.log(errors, 'errors');
   return errors;
 };
