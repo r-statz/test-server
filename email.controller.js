@@ -25,8 +25,8 @@ exports.sendEmail = async (req, res, next) => {
       from_name: from_name,
       from: from,
       subject: subject,
-      text: `Hello ${to_name}, ${body}`,
-      html: `<p>Hello ${to_name},</p></br><p>${body}</p>`
+      text: `Hello ${toName}, ${body}`,
+      html: `<p>Hello ${toName},</p></br><p>${body}</p>`
     };
 
     await emailService.deliver(message);
