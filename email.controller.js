@@ -2,10 +2,17 @@ const emailService = require('./email.service');
 
 exports.sendEmail = async (req, res, next) => {
   const {
-    body: { toName, toEmail, subject, body }
+    body: { toName, toEmail, subject, noun1, noun2, adjective1, adjective2 }
   } = req;
 
-  const errors = await exports.validate({ toName, toEmail, body });
+  const errors = await exports.validate({
+    toName,
+    toEmail,
+    noun1,
+    noun2,
+    adjective1,
+    adjective2
+  });
   if (errors.length) {
     const error = new Error(`Record Invalid: ${errors.join(',')}`);
     error.errors = errors;
@@ -25,8 +32,10 @@ exports.sendEmail = async (req, res, next) => {
       from_name: from_name,
       from: from,
       subject: subject,
-      text: `Hello ${toName}, ${body}`,
-      html: `<p>Hello ${toName},</p></br><p>${body}</p>`
+      // text: `Hello ${toName}, ${body}</br> This message was sent to you by ${from_name}`,
+      text: `Hello ${toName}, Here is a custom fortune for you: A dubious ${noun1} may be an enemy in camoflage and a ${adjective1}, smart, ${adjective2} person will be coming into your ${noun2}. This message was sent to you by ${from_name}`,
+      // html: `<p>Hello ${toName},</p></br><p>${body}</p></br> This message was sent to you by ${from_name}`
+      html: `<p>Hello ${toName},</p></br><p> Here is a custom fortune for you:</p></br><p>A dubious ${noun1} may be an enemy in camoflage and a ${adjective1}, smart, and ${adjective2} person will be coming into your ${noun2}.</p></br><p> This message was sent to you by ${from_name}</p>`
     };
 
     await emailService.deliver(message);
@@ -37,12 +46,27 @@ exports.sendEmail = async (req, res, next) => {
   }
 };
 
-exports.validate = async ({ toName, toEmail, body }) => {
+exports.validate = async ({
+  toName,
+  toEmail,
+  noun1,
+  noun2,
+  adjective1,
+  adjective2
+}) => {
   const errors = [];
-  if (!body.length) errors.push('Email body cannot be blank');
+  if (
+    !noun1.length ||
+    !noun2.length ||
+    !adjective1.length ||
+    !adjective2.length
+  )
+    errors.push('All of the fields are requireds');
+  // if (!body.length) errors.push('Email body cannot be blank');
   if (!toName || !toName.trim()) errors.push('To name cannot be blank');
   if (!toEmail || !toEmail.trim()) errors.push('To email cannot be blank');
-  if (toEmail && !toEmail.match(/^.+@.+\..+$/)) errors.push('Email format is invalid');
+  if (toEmail && !toEmail.match(/^.+@.+\..+$/))
+    errors.push('Email format is invalid');
   console.log(errors, 'errors');
   return errors;
 };
