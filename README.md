@@ -41,3 +41,4 @@ Sendgrid (backup service):
 
 # Production
 I realize that publishing the code was not necessarily a part of the exercise, but in troubleshooting Sendgrid domain situation, I ended up deploying both the client and server to heroku. 
+
