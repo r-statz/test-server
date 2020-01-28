@@ -2,7 +2,7 @@ const emailService = require('./email.service');
 
 exports.sendEmail = async (req, res, next) => {
   const {
-    body: { to_name, to, subject, body }
+    body: { toName, toEmail, subject, body }
   } = req;
 
   const errors = await exports.validate({ to_name, to, body });
@@ -20,8 +20,8 @@ exports.sendEmail = async (req, res, next) => {
 
   try {
     const message = {
-      to_name: to_name,
-      to: to,
+      to_name: toName,
+      to: toEmail,
       from_name: from_name,
       from: from,
       subject: subject,
