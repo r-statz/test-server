@@ -42,6 +42,10 @@ Sendgrid (backup service):
 # Production
 I realize that publishing the code was not necessarily a part of the exercise, but in troubleshooting Sendgrid domain situation, I ended up deploying both the client and server to heroku. 
 
+# Errors
+- To view serverside errors, run `heroku logs -t`
+
 # Improvements
 - Ideally the file structure is less flat, there is a global testing suite in place, a db connected etc.
+- I had a lot of fun working on this, but I'm totally disappointed in how it functions for 3 hrs of trabajo.
 - And sendgrid would be functional. Dang you domain authentication!!!
