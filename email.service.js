@@ -21,10 +21,8 @@ exports.deliver = ({ to, from, subject, text, html }) => {
     html: html
   };
 
-  return mailgun.messages().send(messageData, function(error, body) {
-    console.log(error, 'error');
-    console.log(body, "body")
-  });
+  return mailgun.messages().send(messageData);
+  
   // return sgMail.send(messageData, function(error, body) {
   //   console.log(error, 'error');
   // });

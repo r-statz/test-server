@@ -27,20 +27,23 @@ describe('deliver', () => {
 });
 
 describe('sendEmail', () => {
-  describe('validate', () => {
-    it('throws an error when email format is wrong', async () => {
-      try {
-        await emailCtrl.validate({
-          to_name: '',
-          to: 'nachomama@aol',
-          body: ''
-        });
-      } catch (err) {
-        expect(err.errors).to.include('Email format is invalid');
-        expect(err.errors).to.include('To name cannot be blank');
-        expect(err.errors).to.include('Email body cannot be blank');
-        return;
-      }
-    });
+  it('throws an error when email format is wrong', async () => {
+    try {
+      await emailCtrl.sendEmail({
+        toName: '',
+        toEmail: 'nachomama@aol',
+        noun1: '',
+        noun2: '',
+        adjective1: '',
+        adjective2: ''
+      });
+    } catch (err) {
+      expect(err.errors).to.include('Email format is invalid');
+      expect(err.errors).to.include('To name cannot be blank');
+      expect(err.errors).to.include('To email cannot be blank');
+      expect(err.errors).to.include('All of the fields are required');
+      expect(err.errors).to.include('Subject cannot be blank');
+      return;
+    }
   });
 });
