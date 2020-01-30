@@ -5,12 +5,12 @@ exports.sendEmail = async (req, res, next) => {
     body: { toName, toEmail, subject, noun1, noun2, adjective1, adjective2 }
   } = req;
 
-  const from_name = `Mailgun Sandbox`;
-  const from = `postmaster@sandboxc964dd1f50b9420bb1b0aca0d9e84ecb.mailgun.org`;
+  // const from_name = `Mailgun Sandbox`;
+  // const from = `postmaster@sandboxc964dd1f50b9420bb1b0aca0d9e84ecb.mailgun.org`;
 
   //sg variables
-  // const from_name = `Dr. Cookie`;
-  // const from = `mail.robinstatz.com`;
+  const from_name = `Robin Statz`;
+  const from = `robinstatz@gmail.com`;
 
   const errors = [];
   if (
