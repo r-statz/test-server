@@ -1,8 +1,8 @@
 # Running
 - Make sure you have Node v11 or greater
 - Run `npm install`
-- localhost:8000 (Postman  POST to `localhost:8000/api/email`=> body: `{"to_name": "Name", "to": "whitelisted@email", "subject": "SUBJECT", "body": "BODY"}`)
-- heroku (Postman POST to `https://statz-server.herokuapp.com/api/email` => body: `{"to_name": "Name", "to": "whitelisted@email", "subject": "SUBJECT", "body": "BODY"}`)
+- localhost:8000 (Postman  POST to `localhost:8000/api/email`=> body: `{"to_name": "Name", "to": "whitelisted@email", "subject": "SUBJECT",  "noun1": "noun1", "noun2": "noun2", "adjective1": "adjective1", "adjective2": "adjective2"}`)
+- heroku (Postman POST to `https://statz-server.herokuapp.com/api/email` => body: `{"to_name": "Name", "to": "whitelisted@email", "subject": "SUBJECT", "noun1": "noun1", "noun2": "noun2", "adjective1": "adjective1", "adjective2": "adjective2"}`)
 
 # Dependencies
 - I used body-parser to handle incoming requests from the client code
@@ -11,7 +11,6 @@
 - I used nodemon because nobody wants to fire up the project manually after each tweak of the code
 - I brought in mocha and chai to do the testing with nodejs
 - I also installed sinon and supertest thinking I would need them and then didn't
-
 
 # Testing
 To test the email service:
@@ -30,22 +29,22 @@ To test the email service:
 
 # Email sevices
 Mailgun (default service):
-- I made an account at Mailgun, was super easy to get an API_KEY and set up a sandbox domain. Both of these variables are hidden in the .env (and also configured on heroku). In order to receive emails, I had to whitelist my email address and then confirm via that email account that I wanted to receive emails from mailgun. I imagine I will have to whitelist any future tester's(YOUR) email in order for this code to work.
+- I made an account at Mailgun, was super easy to get an API_KEY and set up a domain. Both of these variables are hidden in the .env (and also configured on heroku). In order to receive emails, I had to whitelist my email address(and those of others) and then confirm via that email account that I wanted to receive emails from mailgun. I imagine I will have to whitelist any future tester's(YOUR) email in order for this code to work.
 
 Sendgrid (backup service):
 - To activate Sendgrid code, comment out lines 24-27 and comment in lines 28-30
-- I was able to sign up for an account and followed all the instructions, but unable to authenticate a domain in order to actually receive emails. When I activate the sendgrid code, I get an unauthorized error due to the domain not being whitelisted. I deployed the client code to Heroku and input statz-client.heroku.app as the domain to see if that would suffice, but alas Sendgrid wanted me to add some reports to Heroku, and when I tried that, Heroku told me I couldn't add other heroku domains. So there.
-- I attempted to do a sendgrid addon on heroku (heroku addons:create sendgrid:starter), but ran into the same whitelisting issue.
-- I'm sorry I didn't have time to jump through the hoops at GoDaddy.com, I feel sick to my stomach not having gotten both services up and running...
-
+- I was able to sign up for an account and followed all the instructions, and had it working until I accidentally exposed an API_KEY on github(oh, the horrors!), and now I'm waiting on them to re-authorize my account.
+- I did sendgrid addon on heroku (heroku addons:create sendgrid:starter)
 
 # Production
+- `https://statz-server.herokuapp.com/`
 I realize that publishing the code was not necessarily a part of the exercise, but in troubleshooting Sendgrid domain situation, I ended up deploying both the client and server to heroku. 
 
 # Errors
-- To view serverside errors, run `heroku logs -t`
+- To view production serverside logs, run `heroku logs -t`
 
 # Improvements
 - Ideally the file structure is less flat, there is a global testing suite in place, a db connected etc.
-- I had a lot of fun working on this, but I'm totally disappointed in how it functions for 3 hrs of trabajo.
-- And sendgrid would be functional. Dang you domain authentication!!!
+- I learned a lot about domains and DNS record during this project, mainly how to "point" to locations. I had never added a custom domain to heroku, nor configured an addon, so that was really fun.
+- I learned how to navigate Mailgun's UI, Sendgrid's UI, and GoDaddy's UI
+- I had a lot of fun working on this, but I'm totally bummed at my sendgrid failure!
