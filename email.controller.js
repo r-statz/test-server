@@ -5,12 +5,16 @@ exports.sendEmail = async (req, res, next) => {
     body: { toName, toEmail, subject, noun1, noun2, adjective1, adjective2 }
   } = req;
 
+  //Sandbox testing domain for Mailgun
   // const from_name = `Mailgun Sandbox`;
   // const from = `postmaster@sandboxc964dd1f50b9420bb1b0aca0d9e84ecb.mailgun.org`;
 
-  //sg variables
   const from_name = `Robin Statz`;
   const from = `robinstatz@gmail.com`;
+
+  //sg variables
+  // const from_name = `Senseisams`;
+  // const from = `senseisallysams@gmail.com`;
 
   const errors = [];
   if (
@@ -21,7 +25,7 @@ exports.sendEmail = async (req, res, next) => {
   )
     errors.push('All of the fields are required');
   if (!toName || !toName.trim()) errors.push('To name cannot be blank');
-  if(!subject || !subject.trim()) errors.push('Subject cannot be blank')
+  if (!subject || !subject.trim()) errors.push('Subject cannot be blank');
   if (!toEmail || !toEmail.trim()) errors.push('To email cannot be blank');
   if (toEmail && !toEmail.match(/^.+@.+\..+$/))
     errors.push('Email format is invalid');

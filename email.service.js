@@ -1,11 +1,12 @@
 const apiKey = process.env.MAILGUN_API_KEY;
 const domain = process.env.MAILGUN_DOMAIN;
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
+// const sgMail = require('@sendgrid/mail');
+// const sgApiKey = process.env.SENDGRID_API_KEY;
+// sgMail.setApiKey(sgApiKey);
 
 const mailgun = require('mailgun-js')({
   apiKey,
-  domain,
+  domain
   // testMode: true,
   // testModeLogger: (httpOptions, payload, form) => {
   //   exports.testModeDeliveries.push({ httpOptions, payload, form })
@@ -21,12 +22,19 @@ exports.deliver = ({ to, from, subject, text, html }) => {
     html: html
   };
 
-  // return mailgun.messages().send(messageData);
+  return mailgun.messages().send(messageData, function(error, body) {
+    console.log(body, "body")
+      if (error) {
+        console.log(error.response.body.errors, 'error');
+      }
+    });
 
-  return sgMail.send(messageData, function(error, body) {
-    // console.log(error.response.body.errors, 'error');
-  });
+  // return sgMail.send(messageData, function(error, body) {
+  //   if (error) {
+  //     console.log(error.response.body.errors, 'error');
+  //   }
+  // });
 };
 
-exports.mailgun = mailgun
-exports.testModeDeliveries = []
+exports.mailgun = mailgun;
+exports.testModeDeliveries = [];
