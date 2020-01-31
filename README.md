@@ -29,7 +29,7 @@ To test the email service:
 
 # Email sevices
 Mailgun (default service):
-- I made an account at Mailgun, was super easy to get an API_KEY and set up a domain. Both of these variables are hidden in the .env (and also configured on heroku). In order to receive emails, I had to whitelist my email address(and those of others) and then confirm via that email account that I wanted to receive emails from mailgun. I imagine I will have to whitelist any future tester's(YOUR) email in order for this code to work.
+- I made an account at Mailgun, was super easy to get an API_KEY and set up a domain. Both of these variables are hidden in the .env (and also configured on heroku). In order to receive emails, I had to whitelist my email address(and those of others) and then confirm via that email account that I wanted to receive emails from mailgun. I imagine I will have to whitelist any future tester's(YOUR) email in order for this code to work. (UNLESS: I add my credit card to Mailgun's site as free plans without credit cards have limitations)
 
 Sendgrid (backup service):
 - To activate Sendgrid code, comment out lines 24-27 and comment in lines 28-30
@@ -47,4 +47,5 @@ I realize that publishing the code was not necessarily a part of the exercise, b
 - Ideally the file structure is less flat, there is a global testing suite in place, a db connected etc.
 - I learned a lot about domains and DNS record during this project, mainly how to "point" to locations. I had never added a custom domain to heroku, nor configured an addon, so that was really fun.
 - I learned how to navigate Mailgun's UI, Sendgrid's UI, and GoDaddy's UI
+- I learned a bit about how messages get flagged as spam and how to avoid that pitfall
 - I had a lot of fun working on this, but I'm totally bummed at my sendgrid failure!
