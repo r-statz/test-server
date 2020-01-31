@@ -25,7 +25,7 @@ exports.deliver = ({ to, from, subject, text, html }) => {
   return mailgun.messages().send(messageData, function(error, body) {
     console.log(body, "body")
       if (error) {
-        console.log(error.response.body.errors, 'error');
+        console.log(error, 'error');
       }
     });
 
